@@ -73,3 +73,42 @@ public:
         return ans;
     }
 };
+
+//my more concise code
+
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> ans(n,vector<int>(n));
+        
+        int minr=1,maxr=n;
+        int minc=0,maxc=n;
+        
+        int num=1,row=0,col=0;
+        bool dirR=1,dirC=1;
+        
+        while(num<=n*n && (minr<=maxr && minc<=maxc)){
+            
+            if(dirC){
+                for(;col<maxc;col++,num++)  ans[row][col]=num;
+                --col,--maxc,++row;
+            }else{
+                for(;col>=minc;col--,num++) ans[row][col]=num;
+                ++col,++minc,--row;
+            }
+            
+            if(dirR){
+                for(;row<maxr;row++,num++)  ans[row][col]=num;
+                --row,--maxr,--col;
+            }else{
+                for(;row>=minr;row--,num++) ans[row][col]=num;
+                ++row,++minr,++col;
+            }
+            
+            dirC=!dirC;
+            dirR=!dirR;
+        }
+        
+        return ans;
+    }
+};
