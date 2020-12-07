@@ -1,0 +1,75 @@
+Given a positive integer n, generate an n x n matrix filled with elements from 1 to n2 in spiral order.
+
+ 
+
+Example 1:
+
+
+Input: n = 3
+Output: [[1,2,3],[8,9,4],[7,6,5]]
+Example 2:
+
+Input: n = 1
+Output: [[1]]
+ 
+
+Constraints:
+
+1 <= n <= 20
+
+
+//cpp my solution
+
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> ans(n,vector<int>(n));
+        
+        int minr=0,maxr=n;
+        int minc=0,maxc=n;
+        
+        int num=1,row=0,col=0;
+        int dirR=1,dirC=1;
+        
+        while(num<=n*n && (minr<=maxr && minc<=maxc)){
+            
+            if(dirC==1){
+                for(;col<maxc;col++,num++){
+                    ans[row][col]=num;
+                }
+                dirC=-1;
+                --col;
+                --maxc;
+                ++row;
+            }else{
+                for(;col>=minc;col--,num++){
+                    ans[row][col]=num;
+                }
+                dirC=1;
+                ++col;
+                ++minc;
+                --row;
+            }
+            
+            if(dirR==1){
+                for(;row<maxr;row++,num++){
+                    ans[row][col]=num;
+                }
+                dirR=-1;
+                --row;
+                --maxr;
+                --col;
+            }else{
+                for(;row>minr;row--,num++){
+                    ans[row][col]=num;
+                }
+                dirR=1;
+                ++row;
+                ++minr;
+                ++col;
+            }
+        }
+        
+        return ans;
+    }
+};
