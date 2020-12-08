@@ -95,3 +95,31 @@ public:
         return ans;
     }
 };
+
+//the ideal solution using just the counters
+//not actually storing the indices as the answer just demands the total
+
+static const auto io_sync_off = []()
+{
+    std::ios::sync_with_stdio(false);
+    cin.tie(NULL); return 0;
+}();
+
+class Solution {
+public:
+    int numPairsDivisibleBy60(vector<int>& time) {
+        int ans=0;
+        vector<int> mp(60);
+        
+        for(auto &t:time)
+            mp[t%60]++;
+        
+        for(int i=0;i<=30;i++){
+            int rem = (60-i)%60;
+            if(i==rem)  ans+=(mp[i]*(mp[i]-1))/2;
+            else    ans+=mp[i]*mp[rem];
+        }
+        
+        return ans;
+    }
+};
