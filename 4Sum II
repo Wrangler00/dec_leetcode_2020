@@ -56,3 +56,27 @@ public:
         return ans;
     }
 };
+
+
+//my other solution
+
+class Solution {
+public:
+    int fourSumCount(vector<int>& a, vector<int>& b, vector<int>& c, vector<int>& d) {
+        int ans=0,sz = a.size();
+        unordered_map<long,long> mp1,mp2;
+        
+        for(int i=0;i<sz;i++){
+           for(int j=0;j<sz;j++){
+               mp1[a[i]+b[j]]++;
+               mp2[-(c[i]+d[j])]++;
+           }
+        }
+        
+        for(auto v:mp1){
+            ans+=(v.second*mp2[v.first]);
+        }
+        
+        return ans;
+    }
+};
